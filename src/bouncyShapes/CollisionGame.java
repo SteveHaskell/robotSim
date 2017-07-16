@@ -13,13 +13,13 @@ public class CollisionGame {
     /**
      * @param args the command line arguments
      */
-    //remove all those for commit1
+    
     public static void main(String[] args) throws InterruptedException {
        JFrame f = new JFrame("Collision Game");
 	   int windowWidth  = 700;
-       int windowHeight = 500;
+	   int windowHeight = 500;
 	   int numBalls     = 10;
-       int tickDur      = 20;
+	   int tickDur      = 20;
        
        
        f.setSize(windowWidth,windowHeight);

@@ -20,7 +20,7 @@ public class BouncyShape {
     public int width;
     public int height;
     public Color color;
-    
+    //just adding alittle comment to delete later
     public BouncyShape(int x, int y, int startingSpeed, Color newColor){
         xLoc    = x;
         yLoc    = y;

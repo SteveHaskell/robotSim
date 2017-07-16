@@ -13,10 +13,7 @@ public class CollisionGame {
     /**
      * @param args the command line arguments
      */
-    //did you find this change before pulling from git2 what about the rearranged variables below?
-    //did you find this change before pulling from git2 what about the rearranged variables below?
-	//Here's another change dude
-	//okay now how about this new line?
+    //remove all those for commit1
     public static void main(String[] args) throws InterruptedException {
        JFrame f = new JFrame("Collision Game");
 	   int numBalls     = 10;

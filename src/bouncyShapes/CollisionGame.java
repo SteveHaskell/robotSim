@@ -15,6 +15,7 @@ public class CollisionGame {
      */
     //did you find this change before pulling from git2 what about the rearranged variables below?
     //did you find this change before pulling from git2 what about the rearranged variables below?
+	//Here's another change dude
 	//okay now how about this new line?
     public static void main(String[] args) throws InterruptedException {
        JFrame f = new JFrame("Collision Game");

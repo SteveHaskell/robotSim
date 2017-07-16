@@ -13,13 +13,16 @@ public class CollisionGame {
     /**
      * @param args the command line arguments
      */
-    //did you find this change before pulling from git2?
+    //did you find this change before pulling from git2 what about the rearranged variables below?
+    //did you find this change before pulling from git2 what about the rearranged variables below?
+	//okay now how about this new line?
     public static void main(String[] args) throws InterruptedException {
        JFrame f = new JFrame("Collision Game");
+	   int numBalls     = 10;
+       int tickDur      = 20;
        int windowWidth  = 800;
        int windowHeight = 500;
-       int numBalls     = 10;
-       int tickDur      = 20;
+       
        f.setSize(windowWidth,windowHeight);
        f.setVisible(true);
        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

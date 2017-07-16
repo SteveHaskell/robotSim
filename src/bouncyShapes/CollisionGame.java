@@ -13,7 +13,7 @@ public class CollisionGame {
     /**
      * @param args the command line arguments
      */
-    
+    //did you find this change before pulling from git2?
     public static void main(String[] args) throws InterruptedException {
        JFrame f = new JFrame("Collision Game");
        int windowWidth  = 800;

@@ -16,10 +16,11 @@ public class CollisionGame {
     //remove all those for commit1
     public static void main(String[] args) throws InterruptedException {
        JFrame f = new JFrame("Collision Game");
+	   int windowWidth  = 700;
+       int windowHeight = 500;
 	   int numBalls     = 10;
        int tickDur      = 20;
-       int windowWidth  = 800;
-       int windowHeight = 500;
+       
        
        f.setSize(windowWidth,windowHeight);
        f.setVisible(true);

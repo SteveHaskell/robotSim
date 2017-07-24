@@ -12,6 +12,7 @@ public class CollisionGame {
 
     /**
      * @param args the command line arguments
+	 * This displays a window with a bunch of bouncing balls
      */
     
     public static void main(String[] args) throws InterruptedException {

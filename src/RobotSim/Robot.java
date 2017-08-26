@@ -6,48 +6,94 @@ package RobotSim;
  */
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.lang.Math;
+
+
 /**
  *
- * Robot Objects know their size, color, speed and position
+ * Robot Objects know their size, color, speed and position, heading, everything basically
  */
 
 public class Robot {
-    public int xLoc;
-    public int yLoc;
-    public int xDir;
-    public int yDir;
-    public int speed;
-    public int width;	//of the box representing the robot
-    public int height;	//of the box representing the robot
+	
+	public double lWheelX;
+	public double lWheelY;
+    public double rWheelX;
+    public double rWheelY;
+    public double xLoc;
+    public double yLoc;
+    public double angle; 	//relative to x axis, radians
+    public double heading;  // angle + 90, radians
+    public double length;	//of the box representing the robot, pixels
     public Color color;
-    public  double	heading;
-    //just adding alittle comment to delete later
-    public Robot(int x, int y, int startingSpeed, Color newColor){
-        xLoc    = x;
-        yLoc    = y;
-        xDir    = 1;
-        yDir    = 1;
-        speed   = startingSpeed;
-        width   = 30;
-        height  = 30;
-        color	= newColor;
-        heading = 0;
+    
+    
+    private double lVelocity; //pixels per tick
+    private double rVelocity; //pixels per tick
+    public Robot(){
+     
+    	/**
+    	 *  positions are calculated at the center of each wheel
+    	 * 
+   		 *   ICC
+   		 *      \
+   		 *       \
+   		 *      LWheel
+   		 *         \     
+   		 *          \
+   		 *           \
+   		 *         RWheel
+   		 *      
+   		 *      
+   		 *   
+    	 */
+    	 
+        lVelocity   = 0.0;
+        rVelocity   = 0.0;
+        length   	= 50.0;
+        color		= Color.blue;
+        angle 		= 0.0;
+        lWheelX 	= 0.0;
+        lWheelY 	= 0.0;
+        rWheelX 	= lWheelX+length*Math.cos(angle);
+        rWheelY 	= lWheelY+length*Math.sin(angle);
+        heading 	= 0.0; //relative to x axis in radians;
+
         
     }
-    public void setXDir(int newXDir){
-        if(newXDir<=0) xDir = -1;
-        else xDir = 1;
+    public void updateLoc(){
+    	
+    	if(angle>2*Math.PI){
+    		angle = angle-(2*Math.PI);
+    	}
+    	heading 	= angle + Math.PI/2;
+    	//rWheelX 	= lWheelX + length*Math.cos(angle);
+        //rWheelY 	= lWheelX + length*Math.sin(angle);
     }
-    public void setYDir(int newYDir){
-        if(newYDir<=0) yDir = -1;
-        else yDir = 1;
+    public void setLVelocity(double newV){
+    	lVelocity = newV;
     }
-    public void moveShape(){
-        for (int i = 0; i < speed/10; i++) {   
-            xLoc = xLoc + 1*xDir;
-            yLoc = yLoc + 1*yDir;
-        }
+    public void setRVelocity(double newV){
+    	rVelocity = newV;
     }
+    //One tick worth of wheel movement
+    public void moveRobot(double t){
+        // R = l/2 * (Vl+Vr)/(Vr-Vl) 
+    	// angluarVelocity = (Vr-Vl)/l
+    	// 
+        double changeInAngle = t*(rVelocity-lVelocity)/length;
+        angle 	= angle + changeInAngle;
+        double R = (length/2)*(lVelocity+rVelocity)/(rVelocity-lVelocity);
+        
+        
+        double ICCx = (R+length/2)*Math.cos(angle);
+    	rWheelX = lWheelX+length*Math.cos(angle);
+    	rWheelY = lWheelY+length*Math.sin(angle);
+    	updateLoc();
+    }
+   
     
     
 }

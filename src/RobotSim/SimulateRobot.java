@@ -1,11 +1,7 @@
 package RobotSim;
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * main script for simulating the tank drive of the robot
  */
-
-
 import javax.swing.JFrame;
 import java.awt.Color;
 public class SimulateRobot {
@@ -16,28 +12,43 @@ public class SimulateRobot {
     
     public static void main(String[] args) throws InterruptedException {
        JFrame f = new JFrame("Collision Game");
-       int windowWidth  = 800;
-       int windowHeight = 500;
+       int windowWidth  = 1000;
+       int windowHeight = 1000;
        int tickDur      = 20;
+  
        f.setSize(windowWidth,windowHeight);
        f.setVisible(true);
        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      
-       EnviornmentManager env 	= new EnviornmentManager(windowWidth-40,windowHeight-80);
-       Robot robot 				= new Robot(100,100,5,Color.red);
+       EnviornmentManager env 	= new EnviornmentManager(windowWidth-40);
+       Robot robot 				= new Robot();
        env.addRobot(robot);
 
        f.add(env);
        
        
-       //PhysicsManager phy = new PhysicsManager(env);
+       int stateChangeLimit = 100; //number of ticks before switching
+       double lWheelVectors[] = {1.0,-1.0,2.0,-2.0,10.0,-10.0};
+       int vecIndex   = 0;
+       
        while(true){
-         //  phy.resolveShapeCollision(ball);
+ 
+    	   robot.setLVelocity(lWheelVectors[vecIndex]);
+    	   for(int i=0;i<stateChangeLimit;i++){
+    		   robot.moveRobot(1.0);
+    		   env.repaint();
+    		   Thread.sleep(tickDur);
+    	   }
+    	   vecIndex++;
+    	   if(vecIndex>=lWheelVectors.length) vecIndex = 0;
+    		   
+    }
+    	   
+    	   
+    	   
            
-           env.repaint();
-           //bot.repaint();
-           Thread.sleep(tickDur);
-       }
+           
+ 
     }
    
     

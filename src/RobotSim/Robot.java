@@ -6,8 +6,6 @@ package RobotSim;
  */
 
 import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.lang.Math;
 
 
@@ -18,80 +16,68 @@ import java.lang.Math;
 
 public class Robot {
 	
-	public double lWheelX;
-	public double lWheelY;
-    public double rWheelX;
-    public double rWheelY;
+
     public double xLoc;
     public double yLoc;
-    public double angle; 	//relative to x axis, radians
-    public double heading;  // angle + 90, radians
-    public double length;	//of the box representing the robot, pixels
-    public Color color;
+    public double theta;		//angle axle makes with x-axis
+    public double heading;  	//angle perpendicular to axis, radians
+    public double length;		//of the axle connecting the two wheels of the robot
+    public Color  color;
     
     
-    private double lVelocity; //pixels per tick
-    private double rVelocity; //pixels per tick
+    private double vl; //pixels per tick
+    private double vr; //pixels per tick
+    
     public Robot(){
-     
-    	/**
-    	 *  positions are calculated at the center of each wheel
-    	 * 
-   		 *   ICC
-   		 *      \
-   		 *       \
-   		 *      LWheel
-   		 *         \     
-   		 *          \
-   		 *           \
-   		 *         RWheel
-   		 *      
-   		 *      
-   		 *   
-    	 */
-    	 
-        lVelocity   = 0.0;
-        rVelocity   = 0.0;
+    	
+    	xLoc		= 0.0;
+    	yLoc 		= -25.0;
+        vl   		= 0.0;
+        vr			= 0.0;
         length   	= 50.0;
+        theta 		= 0.0;
+        heading 	= theta+Math.PI/2;
         color		= Color.blue;
-        angle 		= 0.0;
-        lWheelX 	= 0.0;
-        lWheelY 	= 0.0;
-        rWheelX 	= lWheelX+length*Math.cos(angle);
-        rWheelY 	= lWheelY+length*Math.sin(angle);
-        heading 	= 0.0; //relative to x axis in radians;
-
         
     }
-    public void updateLoc(){
-    	
-    	if(angle>2*Math.PI){
-    		angle = angle-(2*Math.PI);
-    	}
-    	heading 	= angle + Math.PI/2;
-    	//rWheelX 	= lWheelX + length*Math.cos(angle);
-        //rWheelY 	= lWheelX + length*Math.sin(angle);
-    }
+ 
     public void setLVelocity(double newV){
-    	lVelocity = newV;
+    	vl = newV;
     }
     public void setRVelocity(double newV){
-    	rVelocity = newV;
+    	vr = newV;
     }
-    //One tick worth of wheel movement
+    //robot movement based on vr and vl
     public void moveRobot(double t){
-        // R = l/2 * (Vl+Vr)/(Vr-Vl) 
-    	// angluarVelocity = (Vr-Vl)/l
-    	// 
-        double changeInAngle = t*(rVelocity-lVelocity)/length;
-        angle 	= angle + changeInAngle;
-        double R = (length/2)*(lVelocity+rVelocity)/(rVelocity-lVelocity);
-        
-        
-        double ICCx = (R+length/2)*Math.cos(angle);
-    	rWheelX = lWheelX+length*Math.cos(angle);
-    	rWheelY = lWheelY+length*Math.sin(angle);
-    	updateLoc();
+    	//based on physics described here:
+    	//https://chess.eecs.berkeley.edu/eecs149/documentation/differentialDrive.pdf
+    	double omega		= (vr-vl)/length;
+    	double R			= length/2*(vl+vr)/(vr-vl);
+    	double cosTheta 	= Math.cos(theta);
+    	double sinTheta		= Math.sin(theta);
+    	double cosDelta		= Math.cos(omega*t);
+    	double sinDelta		= Math.sin(omega*t);
+    	double ICCx       	= xLoc - R*sinTheta;
+    	double ICCy 		= yLoc + R*cosTheta;
+    	
+    	
+    	if(vr==vl){
+    		double v = vr;
+    		xLoc = xLoc + v*t*cosTheta;
+    		yLoc = yLoc + v*t*sinTheta;
+    	}
+    	else{
+    	xLoc = (xLoc-ICCx)*cosDelta-(yLoc-ICCy)*sinDelta+ICCx;
+    	yLoc = (xLoc-ICCx)*sinDelta+(yLoc-ICCy)*cosDelta+ICCy;
+    	}
+    	//prevent heading overflow
+    	theta 	= theta + omega*t;
+    	
+    	if(theta>2*Math.PI){
+    		theta = theta-(2*Math.PI);
+    	}
+    	heading = theta + Math.PI/2;			
+    	
     }
    
     

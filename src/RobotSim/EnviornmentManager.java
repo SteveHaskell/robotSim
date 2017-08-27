@@ -50,39 +50,72 @@ public class EnviornmentManager extends JPanel{
     	double newAngle = 2*Math.PI - angle;
     	return newAngle;
     }
+    //based on robot x,y location dead center in the axle, each wheel
+    // is found along angle theta
     private void drawRobot(Graphics2D g2d){
-  	  g2d.translate(boxWidth/2, boxWidth/2);
-  	  //draw the wheel axel
-  	  g2d.setColor(Color.black);
-  	  g2d.drawLine(	(int)robot.lWheelX, 
-	  		(int)-robot.lWheelY,
-	  		(int)robot.rWheelX, 
-	  		(int)-robot.rWheelY);
-      AffineTransform old = g2d.getTransform();
-      //rotate left wheel around the left wheel center point
-      g2d.setColor(robot.color);
-      //draw the rectangle for the left wheel
-      g2d.rotate(	angleTransform(robot.angle),
-		  			(int)robot.lWheelX,
-		  			(int)-robot.lWheelY); 
-      g2d.fillRect(	(int)robot.lWheelX-wheelFootprintWidth/2,
-    		  		(int)-robot.lWheelY-wheelFootprintLength/2,
-    		  		wheelFootprintWidth, 
-    		  		wheelFootprintLength);
-      g2d.setTransform(old);
-
-      //rotate right wheel around right wheel center point
-      old = g2d.getTransform();
-      g2d.rotate(	angleTransform(robot.angle),
-    		  		(int)robot.rWheelX,
-    		  		(int)-robot.rWheelY); 
-      g2d.setColor(robot.color);
-      //draw the rectangle for the left wheel
-      g2d.fillRect(	(int)robot.rWheelX-wheelFootprintWidth/2,
-    		  		(int)-robot.rWheelY-wheelFootprintLength/2,
-    		  		wheelFootprintWidth, 
-    		  		wheelFootprintLength);
-      g2d.setTransform(old);
+    	double xLoc 				= robot.xLoc;
+    	double yLoc 				= robot.yLoc;
+    	int wheelRadius 		= 10;
+    	int wheelDiameter 		= wheelRadius*2;
+    	int centerRadius		= 10;
+    	int centerDiameter		= 2*centerRadius;
+    	g2d.translate(boxWidth/2, boxWidth/2);
+ 
+	  	//draw robot center
+	  	//g2d.fillOval((int)xLoc-centerRadius,-(int)yLoc+centerRadius, centerDiameter, centerDiameter);
+    	
+	  	double lWheelX 	= xLoc-robot.length/2*Math.cos(robot.heading);
+	  	double lWheelY 	= yLoc-robot.length/2*Math.sin(robot.heading); 
+	  	
+	  	
+	  	
+	  	
+	  	double rWheelX 	= xLoc+robot.length/2*Math.cos(robot.heading);
+		double rWheelY 	= yLoc+robot.length/2*Math.sin(robot.heading);
+		
+		//draw the axle
+		g2d.setColor(Color.black);
+		g2d.drawLine(	(int)lWheelX, 
+		  				-(int)lWheelY,
+		  				(int)rWheelX, 
+		  				-(int)rWheelY);
+		//draw robot left wheel
+		g2d.setColor(Color.blue);
+	  	g2d.fillOval((int)lWheelX-wheelRadius,-(int)lWheelY-wheelRadius, wheelDiameter, wheelDiameter);
+	  	
+	  	g2d.setColor(Color.green);
+		//draw robot right wheel
+		g2d.fillOval((int)rWheelX-wheelRadius,-(int)rWheelY-wheelRadius, wheelDiameter, wheelDiameter);
+//  	
+		// g2d.drawLine(	(int)robot.lWheelX, 
+//	  		(int)-robot.lWheelY,
+//	  		(int)robot.rWheelX, 
+//	  		(int)-robot.rWheelY);
+//      AffineTransform old = g2d.getTransform();
+//      //rotate left wheel around the left wheel center point
+//      g2d.setColor(robot.color);
+//      //draw the rectangle for the left wheel
+//      g2d.rotate(	angleTransform(robot.angle),
+//		  			(int)robot.lWheelX,
+//		  			(int)-robot.lWheelY); 
+//      g2d.fillRect(	(int)robot.lWheelX-wheelFootprintWidth/2,
+//    		  		(int)-robot.lWheelY-wheelFootprintLength/2,
+//    		  		wheelFootprintWidth, 
+//    		  		wheelFootprintLength);
+//      g2d.setTransform(old);
+//
+//      //rotate right wheel around right wheel center point
+//      old = g2d.getTransform();
+//      g2d.rotate(	angleTransform(robot.angle),
+//    		  		(int)robot.rWheelX,
+//    		  		(int)-robot.rWheelY); 
+//      g2d.setColor(robot.color);
+//      //draw the rectangle for the left wheel
+//      g2d.fillRect(	(int)robot.rWheelX-wheelFootprintWidth/2,
+//    		  		(int)-robot.rWheelY-wheelFootprintLength/2,
+//    		  		wheelFootprintWidth, 
+//    		  		wheelFootprintLength);
+//      g2d.setTransform(old);
       
   }
     private void drawAxis(Graphics2D g2d){

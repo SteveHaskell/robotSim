@@ -4,12 +4,14 @@ package RobotSim;
  */
 
 import javax.swing.JPanel;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.Color;
 import java.lang.Math;
+import java.awt.Font;
 /**
  *
  * @author steve_000
@@ -64,33 +66,38 @@ public class EnviornmentManager extends JPanel{
 	  	//draw robot center
 	  	//g2d.fillOval((int)xLoc-centerRadius,-(int)yLoc+centerRadius, centerDiameter, centerDiameter);
     	
-	  	double lWheelX 	= xLoc-robot.length/2*Math.cos(robot.heading);
-	  	double lWheelY 	= yLoc-robot.length/2*Math.sin(robot.heading); 
+	  	double rWheelX 	= xLoc-robot.length/2*Math.cos(robot.heading);
+	  	double rWheelY 	= yLoc-robot.length/2*Math.sin(robot.heading); 
 	  	
 	  	
 	  	
 	  	
-	  	double rWheelX 	= xLoc+robot.length/2*Math.cos(robot.heading);
-		double rWheelY 	= yLoc+robot.length/2*Math.sin(robot.heading);
+	  	double lWheelX 	= xLoc+robot.length/2*Math.cos(robot.heading);
+		double lWheelY 	= yLoc+robot.length/2*Math.sin(robot.heading);
 		
 		//draw the axle
+		Color	lWheelColor = Color.darkGray;
+		Color   rWheelColor = Color.blue;
 		g2d.setColor(Color.black);
 		g2d.drawLine(	(int)lWheelX, 
 		  				-(int)lWheelY,
 		  				(int)rWheelX, 
 		  				-(int)rWheelY);
 		//draw robot left wheel
-		g2d.setColor(Color.blue);
+		g2d.setColor(lWheelColor);
 	  	g2d.fillOval((int)lWheelX-wheelRadius,-(int)lWheelY-wheelRadius, wheelDiameter, wheelDiameter);
 	  	
-	  	g2d.setColor(Color.green);
+	  	g2d.setColor(rWheelColor);
 		//draw robot right wheel
 		g2d.fillOval((int)rWheelX-wheelRadius,-(int)rWheelY-wheelRadius, wheelDiameter, wheelDiameter);
-//  	
-		// g2d.drawLine(	(int)robot.lWheelX, 
-//	  		(int)-robot.lWheelY,
-//	  		(int)robot.rWheelX, 
-//	  		(int)-robot.rWheelY);
+		String lVelocity = String.valueOf(robot.getLVelocity());
+		String rVelocity = String.valueOf(robot.getRVelocity());
+		//display info	
+		g2d.setColor(lWheelColor);
+		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
+		g2d.drawString("Vl=: "+lVelocity, -400, -400);
+		g2d.setColor(rWheelColor);
+		g2d.drawString("Vr=: "+rVelocity, -400, -350);
 //      AffineTransform old = g2d.getTransform();
 //      //rotate left wheel around the left wheel center point
 //      g2d.setColor(robot.color);

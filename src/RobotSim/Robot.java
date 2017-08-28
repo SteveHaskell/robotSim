@@ -40,7 +40,12 @@ public class Robot {
         color		= Color.blue;
         
     }
- 
+    public double getLVelocity(){
+    	return vl;
+    }
+    public double getRVelocity(){
+    	return vr;
+    }
     public void setLVelocity(double newV){
     	vl = newV;
     }

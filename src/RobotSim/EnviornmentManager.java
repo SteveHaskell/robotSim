@@ -64,8 +64,6 @@ public class EnviornmentManager extends JPanel{
     	g2d.translate(boxWidth/2, boxWidth/2);
  
 	  	//draw robot center
-	  	//g2d.fillOval((int)xLoc-centerRadius,-(int)yLoc+centerRadius, centerDiameter, centerDiameter);
-    	
 	  	double rWheelX 	= xLoc-robot.length/2*Math.cos(robot.heading);
 	  	double rWheelY 	= yLoc-robot.length/2*Math.sin(robot.heading); 
 	  	

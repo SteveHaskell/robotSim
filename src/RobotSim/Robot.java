@@ -34,7 +34,7 @@ public class Robot {
     	yLoc 		= -25.0;
         vl   		= 0.0;
         vr			= 0.0;
-        length   	= 50.0;
+        length   	= 100.0;
         theta 		= 0.0;
         heading 	= theta+Math.PI/2;
         color		= Color.blue;

@@ -28,7 +28,7 @@ public class SimulateRobot {
        
        int stateChangeLimit = 100; //number of ticks before switching
        
-       double lWheelVelocities[] = {1.0,1.0,1.0,0.0,1.0,2.0,3.0,3.0};
+       double lWheelVelocities[] = {0.0,0.0,1.0,0.0,1.0,2.0,3.0,3.0};
        double rWheelVelocities[] = {1.0,1.0,1.0,1.0,0.0,1.0,1.0,1.0};
        
        int vecIndex   = 0;

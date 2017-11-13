@@ -96,6 +96,7 @@ public class EnviornmentManager extends JPanel{
 		g2d.drawString("Vl=: "+lVelocity, -400, -400);
 		g2d.setColor(rWheelColor);
 		g2d.drawString("Vr=: "+rVelocity, -400, -350);
+    }
     private void drawAxis(Graphics2D g2d){
     	g2d.setColor(Color.gray);
     	g2d.fillRect(boxWidth/2, 0, 2, boxHeight);//y axis

@@ -10,7 +10,7 @@ public class SimulateRobot {
      */
     
     public static void main(String[] args) throws InterruptedException {
-       JFrame f = new JFrame("Collision Game");
+       JFrame f = new JFrame("Simulate Robot");
        int windowWidth  = 1000;
        int windowHeight = 1000;
        int tickDur      = 20;

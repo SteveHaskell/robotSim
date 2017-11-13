@@ -74,7 +74,7 @@ public class EnviornmentManager extends JPanel{
 		double lWheelY 	= yLoc+robot.length/2*Math.sin(robot.heading);
 		
 		//draw the axle
-		Color	lWheelColor = Color.darkGray;
+		Color	lWheelColor = Color.red;
 		Color   rWheelColor = Color.blue;
 		g2d.setColor(Color.black);
 		g2d.drawLine(	(int)lWheelX, 
@@ -96,33 +96,6 @@ public class EnviornmentManager extends JPanel{
 		g2d.drawString("Vl=: "+lVelocity, -400, -400);
 		g2d.setColor(rWheelColor);
 		g2d.drawString("Vr=: "+rVelocity, -400, -350);
-//      AffineTransform old = g2d.getTransform();
-//      //rotate left wheel around the left wheel center point
-//      g2d.setColor(robot.color);
-//      //draw the rectangle for the left wheel
-//      g2d.rotate(	angleTransform(robot.angle),
-//		  			(int)robot.lWheelX,
-//		  			(int)-robot.lWheelY); 
-//      g2d.fillRect(	(int)robot.lWheelX-wheelFootprintWidth/2,
-//    		  		(int)-robot.lWheelY-wheelFootprintLength/2,
-//    		  		wheelFootprintWidth, 
-//    		  		wheelFootprintLength);
-//      g2d.setTransform(old);
-//
-//      //rotate right wheel around right wheel center point
-//      old = g2d.getTransform();
-//      g2d.rotate(	angleTransform(robot.angle),
-//    		  		(int)robot.rWheelX,
-//    		  		(int)-robot.rWheelY); 
-//      g2d.setColor(robot.color);
-//      //draw the rectangle for the left wheel
-//      g2d.fillRect(	(int)robot.rWheelX-wheelFootprintWidth/2,
-//    		  		(int)-robot.rWheelY-wheelFootprintLength/2,
-//    		  		wheelFootprintWidth, 
-//    		  		wheelFootprintLength);
-//      g2d.setTransform(old);
-      
-  }
     private void drawAxis(Graphics2D g2d){
     	g2d.setColor(Color.gray);
     	g2d.fillRect(boxWidth/2, 0, 2, boxHeight);//y axis
